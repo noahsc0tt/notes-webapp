@@ -17,18 +17,19 @@ public class SaveNoteServlet extends AbstractJSPServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        
-        Model model = ModelFactory.getModel();
-        
         String key = request.getParameter("key");
         String name = request.getParameter("name");
         String body = request.getParameter("body");
         
-        if (key.equals("")) model.addNoteData(name, body); //isEmpty better way to check? need "null"?
+        if (key == null || key.isEmpty())
+        {
+            Model.addNote(name, body); //isEmpty better way to check? need "null"?
+        }
         else
         {
             LocalDateTime created = DateFormatter.stringToDate(key);
-            model.updateNoteData(created, name, body);
+            Model.updateNote(created, name, body);
+            System.out.println("Updated note: " + name + " " + body);
         }
         
         response.sendRedirect(request.getContextPath() + "/notes_list");

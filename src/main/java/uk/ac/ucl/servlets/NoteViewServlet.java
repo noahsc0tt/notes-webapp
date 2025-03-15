@@ -16,11 +16,19 @@ public class NoteViewServlet extends AbstractJSPServlet
         
         String key = java.net.URLDecoder.decode(request.getParameter("key"), "UTF-8");
         request.setAttribute("key", key);
-     
-        Model model = ModelFactory.getModel();
-        NoteRecord noteData = model.getNoteData(DateFormatter.stringToDate(key));
-        request.setAttribute("note", noteData);
         
+        System.out.println("Looking for key: " + key);
+        System.out.println("Available keys in map: " + Model.getNoteMap().keySet());
+        
+        
+        request.setAttribute("note", Model.getNoteRecord(DateFormatter.stringToDate(key)));
+        
+        System.out.println("Retrieved note: " + Model.getNoteRecord(DateFormatter.stringToDate(key)));
+        
+        
+        System.out.println(key);
+        System.out.println(Model.getNoteRecord(DateFormatter.stringToDate(key)));
+   
         invokeJSP("/noteView.jsp", request, response);
     }
 }

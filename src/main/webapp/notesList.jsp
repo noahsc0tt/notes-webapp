@@ -39,7 +39,8 @@
           <%
             for (Map.Entry<LocalDateTime, NoteRecord> entry: noteList)
             {
-                NoteRecord note = entry.getValue();
+                NoteRecord note = entry.getValue(); //irrelevant, only used once below
+
 
           %>
                 <li><a href="note_body?key=<%=java.net.URLEncoder.encode(DateFormatter.dateToString(entry.getKey()))%>"><%=note.name()%></a></li>

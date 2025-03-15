@@ -5,42 +5,37 @@ import java.util.LinkedHashMap;
 
 public class Model
 {
-    private final LinkedHashMap <LocalDateTime, NoteRecord> noteData;
+    private static final NoteModel noteModel;
     
-    public Model()
+    static
     {
-        noteData = JSONHandler.readJSON();
+        noteModel = NoteModelFactory.getNoteModel();
     }
     
-    public LinkedHashMap<LocalDateTime, NoteRecord> getNoteData() {return noteData;}
+    public static LinkedHashMap<LocalDateTime, NoteRecord> getNoteMap() { return noteModel.getNoteData(); }
+    public static NoteRecord getNoteRecord(LocalDateTime key){ return noteModel.getNoteData(key); }
     
-    public NoteRecord getNoteData(LocalDateTime key){return noteData.get(key);}
     
-    private void sendUpdates()
+    public static void addNote(String name, String body)
+    {
+        noteModel.addNote(name, body);
+        sendUpdates();
+    }
+    public static void updateNote(LocalDateTime key, String name, String body)
+    {
+        noteModel.updateNote(key, name, body);
+        sendUpdates();
+    }
+    public static void deleteNote(LocalDateTime key)
+    {
+        noteModel.deleteNote(key);
+        sendUpdates();
+    }
+    
+    private static void sendUpdates()
     {
         NoteSorter.outOfDate();
-        JSONHandler.writeJSON(noteData);
+        JSONHandler.writeJSON(noteModel.getNoteData());
     }
     
-    public void addNoteData(String name, String body)
-    {
-        NoteRecord newNote = new NoteRecord(name, body);
-        noteData.put(LocalDateTime.now(), newNote);
-        sendUpdates();
-    }
-    
-    public void updateNoteData(LocalDateTime key, String name, String body)
-    {
-        NoteRecord newNote = new NoteRecord(name, body);
-        noteData.put(key, newNote);
-        sendUpdates();
-    }
-    
-    public void deleteNoteData(LocalDateTime key)
-    {
-        noteData.remove(key);
-        JSONHandler.writeJSON(noteData);
-        sendUpdates();
-    }
-
 }

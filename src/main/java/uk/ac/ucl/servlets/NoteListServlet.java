@@ -5,7 +5,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.Model;
-import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.NoteRecord;
 import uk.ac.ucl.model.NoteSorter;
 
@@ -20,18 +19,11 @@ import java.util.Objects;
 @WebServlet("/notes_list")
 public class NoteListServlet extends AbstractJSPServlet
 {
- 
-    private final Model model;
-    
-    public NoteListServlet() throws IOException
-    {
-         model = ModelFactory.getModel();
-    }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException, IllegalArgumentException
   {
-    LinkedHashMap<LocalDateTime, NoteRecord> noteMap = model.getNoteData();
+    LinkedHashMap<LocalDateTime, NoteRecord> noteMap = Model.getNoteMap();
     
     String sortChoice = Objects.requireNonNullElse(request.getParameter("sort"), "mostRecent");
     

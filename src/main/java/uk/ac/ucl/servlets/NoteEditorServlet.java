@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.DateFormatter;
-import uk.ac.ucl.model.ModelFactory;
+import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.NoteRecord;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class NoteEditorServlet extends AbstractJSPServlet
         
         if (key != null)
         {
-            NoteRecord note = ModelFactory.getModel().getNoteData(DateFormatter.stringToDate(key));
+            NoteRecord note = Model.getNoteRecord(DateFormatter.stringToDate(key));
             request.setAttribute("key", key); //could be done inside jsp
             request.setAttribute("name", note.name());
             request.setAttribute("body", note.body());
