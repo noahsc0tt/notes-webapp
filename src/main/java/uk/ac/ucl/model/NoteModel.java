@@ -1,6 +1,7 @@
 package uk.ac.ucl.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashMap;
 
 public class NoteModel
@@ -21,7 +22,9 @@ public class NoteModel
     public void addNote(String name, String body)
     {
         NoteRecord newNote = new NoteRecord(name, body);
-        noteData.put(LocalDateTime.now(), newNote);
+        LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        noteData.put(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), newNote);
+        System.out.println(DateFormatter.dateToString(now));
     }
     
     public void updateNote(LocalDateTime key, String name, String body)

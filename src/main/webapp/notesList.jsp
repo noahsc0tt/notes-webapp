@@ -43,7 +43,7 @@
 
 
           %>
-                <li><a href="note_body?key=<%=java.net.URLEncoder.encode(DateFormatter.dateToString(entry.getKey()))%>"><%=note.name()%></a></li>
+                <li><a href="note_view?key=<%=java.net.URLEncoder.encode(DateFormatter.dateToString(entry.getKey()))%>"><%=note.name()%></a></li>
          <%
             }
     } else {

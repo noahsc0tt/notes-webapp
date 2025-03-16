@@ -8,7 +8,7 @@ import uk.ac.ucl.model.*;
 import java.io.IOException;
 
 
-@WebServlet("/note_body")
+@WebServlet("/note_view")
 public class NoteViewServlet extends AbstractJSPServlet
 {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
