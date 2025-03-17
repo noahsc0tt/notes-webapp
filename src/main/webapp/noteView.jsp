@@ -3,14 +3,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Note Body</title>
-    </head>
+  <title>${name}</title>
+</head>
 <body>
-  <%
-    NoteRecord note = (NoteRecord) request.getAttribute("note");
-  %>
-  <h1><%=note.name()%></h1>
-  <p><%=note.body()%></p>
+
+  <h1><%=request.getAttribute("name")%></h1>
+  <div><%=request.getAttribute("body")%></div>
 
   <form action = "/note_editor" method="GET">
     <input type="hidden" name="key" value="${key}">

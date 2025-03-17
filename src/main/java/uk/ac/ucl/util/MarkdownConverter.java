@@ -10,10 +10,10 @@ public class MarkdownConverter {
             return "";
         }
         
-        // Convert line breaks
+        // New lines
         String html = markdown.replaceAll("\n", "<br>");
         
-        // Headers
+        /*// Headers
         html = html.replaceAll("(?m)^# (.*?)$", "<h1>$1</h1>");
         html = html.replaceAll("(?m)^## (.*?)$", "<h2>$1</h2>");
         html = html.replaceAll("(?m)^### (.*?)$", "<h3>$1</h3>");
@@ -23,6 +23,8 @@ public class MarkdownConverter {
         
         // Italic
         html = html.replaceAll("\\*(.*?)\\*", "<em>$1</em>");
+        */
+        
         
         // Links
         Pattern linkPattern = Pattern.compile("\\[(.*?)\\]\\((.*?)\\)");
@@ -31,7 +33,6 @@ public class MarkdownConverter {
         while (linkMatcher.find()) {
             String text = linkMatcher.group(1);
             String url = linkMatcher.group(2);
-            // Simple sanitization
             url = url.replaceAll("\"", "&quot;");
             linkMatcher.appendReplacement(sb,
                     "<a href=\"" + url + "\" target=\"_blank\">" + text + "</a>");
@@ -46,7 +47,6 @@ public class MarkdownConverter {
         while (imgMatcher.find()) {
             String alt = imgMatcher.group(1);
             String src = imgMatcher.group(2);
-            // Simple sanitization
             src = src.replaceAll("\"", "&quot;");
             alt = alt.replaceAll("\"", "&quot;");
             imgMatcher.appendReplacement(sb,

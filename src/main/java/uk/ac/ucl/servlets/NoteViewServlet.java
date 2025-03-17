@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.*;
 import uk.ac.ucl.util.DateFormatter;
+import uk.ac.ucl.util.MarkdownConverter;
 
 import java.io.IOException;
 
@@ -18,18 +19,13 @@ public class NoteViewServlet extends AbstractJSPServlet
         String key = java.net.URLDecoder.decode(request.getParameter("key"), "UTF-8");
         request.setAttribute("key", key);
         
-        System.out.println("Looking for key: " + key);
-        System.out.println("Available keys in map: " + Model.getNoteMap().keySet());
+        NoteRecord note = Model.getNoteRecord(DateFormatter.stringToDate(key));
+        request.setAttribute("name", note.name());
+        System.out.println("name" + note.name());
+        request.setAttribute("body", MarkdownConverter.convertToHtml(note.body()));
+        System.out.println("body" + note.body());
+        System.out.println("body" + MarkdownConverter.convertToHtml(note.body()));
         
-        
-        request.setAttribute("note", Model.getNoteRecord(DateFormatter.stringToDate(key)));
-        
-        System.out.println("Retrieved note: " + Model.getNoteRecord(DateFormatter.stringToDate(key)));
-        
-        
-        System.out.println(key);
-        System.out.println(Model.getNoteRecord(DateFormatter.stringToDate(key)));
-   
         invokeJSP("/noteView.jsp", request, response);
     }
 }

@@ -8,4 +8,4 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Objects" %>
-<%@ page import="uk.ac.ucl.model.DateFormatter" %>
+<%@ page import="uk.ac.ucl.util.DateFormatter" %>

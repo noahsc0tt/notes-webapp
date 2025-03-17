@@ -1,7 +1,7 @@
 package uk.ac.ucl.model;
 
 import uk.ac.ucl.util.JSONHandler;
-
+import uk.ac.ucl.util.MarkdownConverter;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 
@@ -38,6 +38,10 @@ public class Model
     {
         NoteSorter.outOfDate();
         JSONHandler.writeJSON(noteModel.getNoteData());
+    }
+    
+    public static String convertMarkdownToHtml(String markdown) {
+        return MarkdownConverter.convertToHtml(markdown);
     }
     
 }
