@@ -1,5 +1,8 @@
 package uk.ac.ucl.model;
 
+import uk.ac.ucl.util.DateFormatter;
+import uk.ac.ucl.util.JSONHandler;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashMap;

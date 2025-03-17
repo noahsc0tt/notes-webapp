@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import uk.ac.ucl.model.NoteRecord;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import uk.ac.ucl.model.DateFormatter;
@@ -48,7 +47,7 @@ public final class noteEditor_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_imports_classes = new java.util.LinkedHashSet<>(11);
     _jspx_imports_classes.add("java.util.LinkedHashMap");
     _jspx_imports_classes.add("java.util.Objects");
-    _jspx_imports_classes.add("uk.ac.ucl.model.DateFormatter");
+    _jspx_imports_classes.add("uk.ac.ucl.util.DateFormatter");
     _jspx_imports_classes.add("java.util.List");
     _jspx_imports_classes.add("java.util.Map");
     _jspx_imports_classes.add("java.time.LocalDateTime");

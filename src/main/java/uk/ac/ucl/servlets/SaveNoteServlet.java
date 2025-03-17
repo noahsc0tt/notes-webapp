@@ -5,9 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.*;
+import uk.ac.ucl.util.DateFormatter;
 
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
 
 import java.io.IOException;
 
