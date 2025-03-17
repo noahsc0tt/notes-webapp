@@ -28,7 +28,7 @@ public class NoteEditorServlet extends AbstractJSPServlet
         }
         else
         {
-            request.setAttribute("name", "Enter note name");
+            request.setAttribute("name", "Enter note title");
             request.setAttribute("body", "Enter note body");
             
         }

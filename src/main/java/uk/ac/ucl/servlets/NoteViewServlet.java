@@ -21,10 +21,7 @@ public class NoteViewServlet extends AbstractJSPServlet
         
         NoteRecord note = Model.getNoteRecord(DateFormatter.stringToDate(key));
         request.setAttribute("name", note.name());
-        System.out.println("name" + note.name());
         request.setAttribute("body", MarkdownConverter.convertToHtml(note.body()));
-        System.out.println("body" + note.body());
-        System.out.println("body" + MarkdownConverter.convertToHtml(note.body()));
         
         invokeJSP("/noteView.jsp", request, response);
     }
