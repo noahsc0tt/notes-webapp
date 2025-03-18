@@ -21,7 +21,6 @@ function handleImageUpload() {
     const file = fileInput.files[0];
 
     if (file) {
-        // Simple approach - just insert the placeholder for the image
         const textarea = document.getElementsByName("body")[0];
         const startPos = textarea.selectionStart;
         const endPos = textarea.selectionEnd;

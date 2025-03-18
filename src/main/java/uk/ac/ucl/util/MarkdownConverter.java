@@ -10,57 +10,66 @@ public class MarkdownConverter {
             return "";
         }
         
-        // New lines
-        String html = markdown.replaceAll("\n", "<br>");
+        String html = replaceNewlines(markdown);
+        html = processImages(html);
+        html = processLinks(html);
         
-        /*// Headers
-        html = html.replaceAll("(?m)^# (.*?)$", "<h1>$1</h1>");
-        html = html.replaceAll("(?m)^## (.*?)$", "<h2>$1</h2>");
-        html = html.replaceAll("(?m)^### (.*?)$", "<h3>$1</h3>");
-        
-        // Bold
-        html = html.replaceAll("\\*\\*(.*?)\\*\\*", "<strong>$1</strong>");
-        
-        // Italic
-        html = html.replaceAll("\\*(.*?)\\*", "<em>$1</em>");
-        */
-        
-        
-        // Process images FIRST (before links)
+        return html;
+    }
+    
+    private static String replaceNewlines(String text) {
+        return text.replaceAll("\n", "<br>");
+    }
+    
+    private static String processImages(String html) {
         Pattern imagePattern = Pattern.compile("!\\[(.*?)\\]\\((.*?)\\)");
         Matcher imageMatcher = imagePattern.matcher(html);
         StringBuffer sb = new StringBuffer();
-        while (imageMatcher.find()) {
-            String alt = imageMatcher.group(1);
-            String src = imageMatcher.group(2);
-            
-            // Ensure the path is relative to context root
-            if (!src.startsWith("http") && !src.startsWith("/")) {
-                src = "/" + src;
-            }
-            
-            src = src.replaceAll("\"", "&quot;");
-            alt = alt.replaceAll("\"", "&quot;");
-            imageMatcher.appendReplacement(sb,
-                    "<img src=\"" + src + "\" alt=\"" + alt + "\" style=\"max-width:100%;\">");
-        }
-        imageMatcher.appendTail(sb);
-        html = sb.toString();
         
-        // Then process links
+        while (imageMatcher.find()) {
+            String alt = escapeQuotes(imageMatcher.group(1));
+            String src = normalizePath(imageMatcher.group(2));
+            
+            imageMatcher.appendReplacement(sb, createImageTag(src, alt));
+        }
+        
+        imageMatcher.appendTail(sb);
+        return sb.toString();
+    }
+    
+    private static String normalizePath(String src) {
+        if (!src.startsWith("http") && !src.startsWith("/")) {
+            src = "/" + src;
+        }
+        return escapeQuotes(src);
+    }
+    
+    private static String createImageTag(String src, String alt) {
+        return "<img src=\"" + src + "\" alt=\"" + alt +
+                "\" style=\"max-width:50%; height:auto;\">";
+    }
+    
+    private static String processLinks(String html) {
         Pattern linkPattern = Pattern.compile("\\[(.*?)\\]\\((.*?)\\)");
         Matcher linkMatcher = linkPattern.matcher(html);
-        sb = new StringBuffer();
+        StringBuffer sb = new StringBuffer();
+        
         while (linkMatcher.find()) {
             String text = linkMatcher.group(1);
-            String url = linkMatcher.group(2);
-            url = url.replaceAll("\"", "&quot;");
-            linkMatcher.appendReplacement(sb,
-                    "<a href=\"" + url + "\" target=\"_blank\">" + text + "</a>");
+            String url = escapeQuotes(linkMatcher.group(2));
+            
+            linkMatcher.appendReplacement(sb, createLinkTag(url, text));
         }
-        linkMatcher.appendTail(sb);
-        html = sb.toString();
         
-        return html;
+        linkMatcher.appendTail(sb);
+        return sb.toString();
+    }
+    
+    private static String createLinkTag(String url, String text) {
+        return "<a href=\"" + url + "\" target=\"_blank\">" + text + "</a>";
+    }
+    
+    private static String escapeQuotes(String text) {
+        return text.replaceAll("\"", "&quot;");
     }
 }

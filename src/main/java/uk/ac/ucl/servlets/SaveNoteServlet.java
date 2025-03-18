@@ -18,52 +18,72 @@ import java.nio.file.StandardCopyOption;
 import java.util.Collection;
 import java.io.IOException;
 
-
 @WebServlet("/save_note")
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1MB
         maxFileSize = 1024 * 1024 * 10,  // 10MB
         maxRequestSize = 1024 * 1024 * 15 // 15MB
 )
-public class SaveNoteServlet extends AbstractJSPServlet
-{
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        Collection<Part> parts = request.getParts();
-        
+public class SaveNoteServlet extends AbstractJSPServlet {
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Extract form data
         String key = request.getParameter("key");
         String name = request.getParameter("name");
         String body = request.getParameter("body");
         
+        // Process image upload if present
+        processImageUpload(request);
         
+        // Save or update the note
+        saveNote(key, name, body);
+        
+        // Redirect to the notes list page
+        response.sendRedirect(request.getContextPath() + "/notes_list");
+    }
+    
+    private void processImageUpload(HttpServletRequest request) throws ServletException, IOException {
         Part filePart = request.getPart("imageFile");
-        if (filePart != null && filePart.getSize() > 0) {
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            
-            // Create img directory if it doesn't exist
-            String appPath = request.getServletContext().getRealPath("");
-            File imgDir = new File(appPath, "img");
-            if (!imgDir.exists()) {
-                imgDir.mkdir();
-            }
-            
-            // Save the file
-            try (InputStream fileContent = filePart.getInputStream()) {
-                Path targetPath = Paths.get(imgDir.getAbsolutePath(), fileName);
-                Files.copy(fileContent, targetPath, StandardCopyOption.REPLACE_EXISTING);
-            }
+        if (!isValidImageUpload(filePart)) {
+            return;
         }
         
-        if (key == null || key.isEmpty())
-        {
-            Model.addNote(name, body); //isEmpty better way to check? need "null"?
+        String fileName = getFileName(filePart);
+        File imgDir = createImageDirectory(request);
+        saveUploadedFile(filePart, imgDir, fileName);
+    }
+    
+    private boolean isValidImageUpload(Part filePart) {
+        return filePart != null && filePart.getSize() > 0;
+    }
+    
+    private String getFileName(Part filePart) {
+        return Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+    }
+    
+    private File createImageDirectory(HttpServletRequest request) {
+        String appPath = request.getServletContext().getRealPath("");
+        File imgDir = new File(appPath, "img");
+        if (!imgDir.exists()) {
+            imgDir.mkdir();
         }
-        else
-        {
+        return imgDir;
+    }
+    
+    private void saveUploadedFile(Part filePart, File imgDir, String fileName) throws IOException {
+        try (InputStream fileContent = filePart.getInputStream()) {
+            Path targetPath = Paths.get(imgDir.getAbsolutePath(), fileName);
+            Files.copy(fileContent, targetPath, StandardCopyOption.REPLACE_EXISTING);
+        }
+    }
+    
+    private void saveNote(String key, String name, String body) {
+        if (key == null || key.isEmpty()) {
+            Model.addNote(name, body);
+        } else {
             Model.updateNote(DateFormatter.stringToDate(key), name, body);
         }
-        
-        response.sendRedirect(request.getContextPath() + "/notes_list");
-        
     }
 }
