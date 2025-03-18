@@ -23,21 +23,21 @@ public class NoteListServlet extends AbstractJSPServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException, IllegalArgumentException
   {
-    LinkedHashMap<LocalDateTime, NoteRecord> noteMap = Model.getNoteMap();
-    
     String sortChoice = Objects.requireNonNullElse(request.getParameter("sort"), "mostRecent");
-    
-    List<Map.Entry<LocalDateTime, NoteRecord>> noteList = switch (sortChoice)
-    {
-        case "leastRecent" -> NoteSorter.leastRecent(noteMap);
-        case "alphabetical" -> NoteSorter.alphabetical(noteMap);
-        case "revAlphabetical" -> NoteSorter.revAlphabetical(noteMap);
-        case "mostRecent" -> NoteSorter.mostRecent(noteMap);
-        default -> throw new IllegalArgumentException("Invalid sort choice");
-    };
-    
-    request.setAttribute("noteList", noteList);
-
+    request.setAttribute("noteList", sortNoteList(sortChoice));
     invokeJSP("/notesList.jsp", request, response);
+  }
+  
+  private List<Map.Entry<LocalDateTime, NoteRecord>> sortNoteList(String sortChoice)
+  {
+      LinkedHashMap<LocalDateTime, NoteRecord> noteMap = Model.getNoteMap();
+      return switch (sortChoice)
+      {
+          case "leastRecent" -> NoteSorter.leastRecent(noteMap);
+          case "alphabetical" -> NoteSorter.alphabetical(noteMap);
+          case "revAlphabetical" -> NoteSorter.revAlphabetical(noteMap);
+          case "mostRecent" -> NoteSorter.mostRecent(noteMap);
+          default -> throw new IllegalArgumentException("Invalid sort choice");
+      };
   }
 }

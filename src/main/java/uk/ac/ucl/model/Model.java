@@ -9,10 +9,7 @@ public class Model
 {
     private static final NoteModel noteModel;
     
-    static
-    {
-        noteModel = NoteModelFactory.getNoteModel();
-    }
+    static { noteModel = NoteModelFactory.getNoteModel(); }
     
     public static LinkedHashMap<LocalDateTime, NoteRecord> getNoteMap() { return noteModel.getNoteData(); }
     public static NoteRecord getNoteRecord(LocalDateTime key){ return noteModel.getNoteData(key); }
@@ -39,9 +36,4 @@ public class Model
         NoteSorter.outOfDate();
         JSONHandler.writeJSON(noteModel.getNoteData());
     }
-    
-    public static String convertMarkdownToHtml(String markdown) {
-        return MarkdownConverter.convertToHtml(markdown);
-    }
-    
 }

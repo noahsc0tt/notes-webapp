@@ -6,9 +6,7 @@ import java.util.regex.Pattern;
 public class MarkdownConverter {
     
     public static String convertToHtml(String markdown) {
-        if (markdown == null) {
-            return "";
-        }
+        if (markdown == null) { return ""; }
         
         String html = replaceNewlines(markdown);
         html = processImages(html);

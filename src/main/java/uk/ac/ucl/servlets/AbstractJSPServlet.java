@@ -13,7 +13,7 @@ public abstract class AbstractJSPServlet extends HttpServlet
 {
     protected void invokeJSP(String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // Invoke the JSP page.
+        // Invoke the JSP page
         ServletContext context = getServletContext();
         RequestDispatcher dispatch = context.getRequestDispatcher(fileName);
         dispatch.forward(request, response);

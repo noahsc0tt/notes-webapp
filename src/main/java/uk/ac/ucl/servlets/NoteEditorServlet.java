@@ -18,20 +18,17 @@ public class NoteEditorServlet extends AbstractJSPServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String key = request.getParameter("key");
+        NoteRecord note;
         
-        if (key != null)
-        {
-            NoteRecord note = Model.getNoteRecord(DateFormatter.stringToDate(key));
-            request.setAttribute("key", key); //could be done inside jsp
-            request.setAttribute("name", note.name());
-            request.setAttribute("body", note.body());
-        }
+        if (key == null) { note = new NoteRecord("Enter note title", "Enter note body"); }
         else
         {
-            request.setAttribute("name", "Enter note title");
-            request.setAttribute("body", "Enter note body");
-            
+            note = Model.getNoteRecord(DateFormatter.stringToDate(key));
+            request.setAttribute("key", key);
         }
+        
+        request.setAttribute("name", note.name());
+        request.setAttribute("body", note.body());
         invokeJSP("/noteEditor.jsp", request, response);
     }
 }

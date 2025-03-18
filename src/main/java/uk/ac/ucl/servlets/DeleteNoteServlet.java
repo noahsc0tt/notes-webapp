@@ -16,9 +16,7 @@ public class DeleteNoteServlet extends AbstractJSPServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        
         Model.deleteNote(DateFormatter.stringToDate(request.getParameter("key")));
         response.sendRedirect(request.getContextPath() + "/notes_list");
-        
     }
 }

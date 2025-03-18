@@ -1,39 +1,31 @@
+function insertTextAtCursor(template) {
+    const textarea = document.getElementsByName("body")[0];
+    const startPosition = textarea.selectionStart;
+    const endPosition = textarea.selectionEnd;
+    const beforeText = textarea.value.substring(0, startPosition);
+    const afterText = textarea.value.substring(endPosition, textarea.value.length);
+
+    textarea.value = beforeText + template + afterText;
+    textarea.focus();
+}
+
 function insertLink() {
     const url = prompt("Enter URL:", "https://");
     const text = prompt("Enter link text:", "Link Text");
-    if (url && text) {
-        const textarea = document.getElementsByName("body")[0];
-        const startPos = textarea.selectionStart;
-        const endPos = textarea.selectionEnd;
-        const beforeText = textarea.value.substring(0, startPos);
-        const afterText = textarea.value.substring(endPos, textarea.value.length);
-        textarea.value = beforeText + "[" + text + "](" + url + ")" + afterText;
-        textarea.focus();
-    }
+
+    if (url && text) { insertTextAtCursor("[" + text + "](" + url + ")"); }
 }
 
-function insertImage() {
-    document.getElementById('imageUpload').click();
-}
+function insertImage() { document.getElementById('imageUpload').click(); }
 
 function handleImageUpload() {
     const fileInput = document.getElementById('imageUpload');
     const file = fileInput.files[0];
 
-    if (file) {
-        const textarea = document.getElementsByName("body")[0];
-        const startPos = textarea.selectionStart;
-        const endPos = textarea.selectionEnd;
-        const beforeText = textarea.value.substring(0, startPos);
-        const afterText = textarea.value.substring(endPos, textarea.value.length);
-
-        // Insert markdown for the image
-        textarea.value = beforeText + "![" + file.name + "](img/" + file.name + ")" + afterText;
-        textarea.focus();
-    }
+    if (file) { insertTextAtCursor("![" + file.name + "](img/" + file.name + ")"); }
 }
 
-// Add event listeners after DOM is fully loaded
+// Add event listener for file upload
 document.addEventListener('DOMContentLoaded', function() {
     const imageUpload = document.getElementById('imageUpload');
     if (imageUpload) {

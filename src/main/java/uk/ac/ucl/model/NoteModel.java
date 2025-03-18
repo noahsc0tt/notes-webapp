@@ -16,11 +16,8 @@ public class NoteModel
         noteData = JSONHandler.readJSON();
     }
     
-    
     public LinkedHashMap<LocalDateTime, NoteRecord> getNoteData() { return noteData; }
-    
     public NoteRecord getNoteData(LocalDateTime key){ return noteData.get(key); }
-    
     
     public void addNote(String name, String body)
     {
