@@ -41,18 +41,24 @@ public class MarkdownConverter {
         html = sb.toString();
         
         // Images
-        Pattern imgPattern = Pattern.compile("!\\[(.*?)\\]\\((.*?)\\)");
-        Matcher imgMatcher = imgPattern.matcher(html);
+        Pattern imagePattern = Pattern.compile("!\\[(.*?)\\]\\((.*?)\\)");
+        Matcher imageMatcher = imagePattern.matcher(html);
         sb = new StringBuffer();
-        while (imgMatcher.find()) {
-            String alt = imgMatcher.group(1);
-            String src = imgMatcher.group(2);
+        while (imageMatcher.find()) {
+            String alt = imageMatcher.group(1);
+            String src = imageMatcher.group(2);
+            
+            // Ensure the path is relative to context root
+            if (!src.startsWith("http") && !src.startsWith("/")) {
+                src = "/" + src;
+            }
+            
             src = src.replaceAll("\"", "&quot;");
             alt = alt.replaceAll("\"", "&quot;");
-            imgMatcher.appendReplacement(sb,
+            imageMatcher.appendReplacement(sb,
                     "<img src=\"" + src + "\" alt=\"" + alt + "\" style=\"max-width:100%;\">");
         }
-        imgMatcher.appendTail(sb);
+        imageMatcher.appendTail(sb);
         html = sb.toString();
         
         return html;
