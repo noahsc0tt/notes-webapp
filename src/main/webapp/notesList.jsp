@@ -30,6 +30,12 @@
     </select>
   </form>
 
+  <form action="/notes_list" method="GET">
+    <label for="search">Search: </label>
+    <input type="text" name="search" value="Enter search term">
+    <input type="submit" value="Search">
+  </form>
+
   <%
     List<Map.Entry<LocalDateTime, NoteRecord>> noteList = (List<Map.Entry<LocalDateTime, NoteRecord>>) request.getAttribute("noteList");
     if (noteList.size() !=0)

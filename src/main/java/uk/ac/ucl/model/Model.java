@@ -1,9 +1,10 @@
 package uk.ac.ucl.model;
 
 import uk.ac.ucl.util.JSONHandler;
-import uk.ac.ucl.util.MarkdownConverter;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Model
 {
@@ -35,5 +36,10 @@ public class Model
     {
         NoteSorter.outOfDate();
         JSONHandler.writeJSON(noteModel.getNoteData());
+    }
+    
+    public static List<Map.Entry<LocalDateTime, NoteRecord>> searchFor(String query, Iterable<Map.Entry<LocalDateTime, NoteRecord>> notes)
+    {
+        return NoteSearcher.searchNotes(query, notes);
     }
 }

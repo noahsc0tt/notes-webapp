@@ -24,7 +24,15 @@ public class NoteListServlet extends AbstractJSPServlet
           throws ServletException, IOException, IllegalArgumentException
   {
     String sortChoice = Objects.requireNonNullElse(request.getParameter("sort"), "mostRecent");
-    request.setAttribute("noteList", sortNoteList(sortChoice));
+    List <Map.Entry<LocalDateTime, NoteRecord>> noteList = sortNoteList(sortChoice);
+    
+    String searchQuery = request.getParameter("search");
+    
+    if (searchQuery != null)
+    {
+        noteList = Model.searchFor(searchQuery, noteList);
+    }
+    request.setAttribute("noteList", noteList);
     invokeJSP("/notesList.jsp", request, response);
   }
   
