@@ -11,7 +11,7 @@
   <div><%=request.getAttribute("body")%></div>
 
   <form action = "/note_editor" method="GET">
-    <input type="hidden" name="key" value="${key}">
+    <input type="hidden" name="key" value="${param.key}">
     <button type="submit">Edit Note</button>
   </form>
 

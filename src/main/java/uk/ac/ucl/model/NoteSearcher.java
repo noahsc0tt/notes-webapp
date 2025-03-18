@@ -12,7 +12,7 @@ public class NoteSearcher
         List<Map.Entry<LocalDateTime, NoteRecord>> searchResults = new ArrayList<>();
         for (Map.Entry<LocalDateTime, NoteRecord> entry : noteList)
         {
-            if (entry.getValue().name().contains(query) || entry.getValue().body().contains(query))
+            if (entry.getValue().name().toLowerCase().contains(query.toLowerCase()) || entry.getValue().body().toLowerCase().contains(query.toLowerCase()))
             {
                 searchResults.add(entry);
             }

@@ -21,11 +21,7 @@ public class NoteEditorServlet extends AbstractJSPServlet
         NoteRecord note;
         
         if (key == null) { note = new NoteRecord("Enter note title", "Enter note body"); }
-        else
-        {
-            note = Model.getNoteRecord(DateFormatter.stringToDate(key));
-            request.setAttribute("key", key);
-        }
+        else { note = Model.getNoteRecord(DateFormatter.stringToDate(key)); }
         
         request.setAttribute("name", note.name());
         request.setAttribute("body", note.body());

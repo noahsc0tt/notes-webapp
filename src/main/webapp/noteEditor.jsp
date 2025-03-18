@@ -24,7 +24,7 @@
       <button type="button" onclick="insertLink()">Insert Link</button>
       <button type="button" onclick="insertImage()">Insert Image</button>
       <input type="file" id="imageUpload" name="imageFile" accept="image/*" style="display:none"><br>
-      <input type="hidden" name="key" value="${key}"><br><br>
+      <input type="hidden" name="key" value="${param.key}"><br><br>
       <button type="submit">Save Note</button>
   </form>
 

@@ -27,19 +27,25 @@
                 <option value="<%= label.getKey() %>" <%= label.getKey().equals(selectedSort) ? "selected" : "" %>><%= label.getValue() %></option>
             <%}%>
 
+            <% if (request.getParameter("search") != null && !request.getParameter("search").isEmpty()) { %>
+                <input type="hidden" name="search" value="${param.search}">
+            <% } %>
     </select>
   </form>
 
   <form action="/notes_list" method="GET">
     <label for="search">Search: </label>
-    <input type="text" name="search" value="Enter search term">
+    <input type="text" name="search" value=${param.search}>
     <input type="submit" value="Search">
+
+   <% if (request.getParameter("sort") != null && !request.getParameter("sort").isEmpty()) { %>
+       <input type="hidden" name="sort" value="${param.sort}">
+     <% } %>
   </form>
 
   <%
     List<Map.Entry<LocalDateTime, NoteRecord>> noteList = (List<Map.Entry<LocalDateTime, NoteRecord>>) request.getAttribute("noteList");
-    if (noteList.size() !=0)
-        {
+    if (noteList.size() !=0) {
         %>
         <ul>
           <%

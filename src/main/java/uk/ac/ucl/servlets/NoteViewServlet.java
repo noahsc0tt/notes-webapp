@@ -15,10 +15,7 @@ public class NoteViewServlet extends AbstractJSPServlet
 {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        
         String key = java.net.URLDecoder.decode(request.getParameter("key"), "UTF-8");
-        request.setAttribute("key", key);
-        
         NoteRecord note = Model.getNoteRecord(DateFormatter.stringToDate(key));
         request.setAttribute("name", note.name());
         request.setAttribute("body", MarkdownConverter.convertToHtml(note.body()));
