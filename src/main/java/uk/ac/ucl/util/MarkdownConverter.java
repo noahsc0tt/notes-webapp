@@ -26,24 +26,10 @@ public class MarkdownConverter {
         */
         
         
-        // Links
-        Pattern linkPattern = Pattern.compile("\\[(.*?)\\]\\((.*?)\\)");
-        Matcher linkMatcher = linkPattern.matcher(html);
-        StringBuffer sb = new StringBuffer();
-        while (linkMatcher.find()) {
-            String text = linkMatcher.group(1);
-            String url = linkMatcher.group(2);
-            url = url.replaceAll("\"", "&quot;");
-            linkMatcher.appendReplacement(sb,
-                    "<a href=\"" + url + "\" target=\"_blank\">" + text + "</a>");
-        }
-        linkMatcher.appendTail(sb);
-        html = sb.toString();
-        
-        // Images
+        // Process images FIRST (before links)
         Pattern imagePattern = Pattern.compile("!\\[(.*?)\\]\\((.*?)\\)");
         Matcher imageMatcher = imagePattern.matcher(html);
-        sb = new StringBuffer();
+        StringBuffer sb = new StringBuffer();
         while (imageMatcher.find()) {
             String alt = imageMatcher.group(1);
             String src = imageMatcher.group(2);
@@ -59,6 +45,20 @@ public class MarkdownConverter {
                     "<img src=\"" + src + "\" alt=\"" + alt + "\" style=\"max-width:100%;\">");
         }
         imageMatcher.appendTail(sb);
+        html = sb.toString();
+        
+        // Then process links
+        Pattern linkPattern = Pattern.compile("\\[(.*?)\\]\\((.*?)\\)");
+        Matcher linkMatcher = linkPattern.matcher(html);
+        sb = new StringBuffer();
+        while (linkMatcher.find()) {
+            String text = linkMatcher.group(1);
+            String url = linkMatcher.group(2);
+            url = url.replaceAll("\"", "&quot;");
+            linkMatcher.appendReplacement(sb,
+                    "<a href=\"" + url + "\" target=\"_blank\">" + text + "</a>");
+        }
+        linkMatcher.appendTail(sb);
         html = sb.toString();
         
         return html;
