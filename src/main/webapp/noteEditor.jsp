@@ -1,4 +1,4 @@
-<%-- This JSP file is used to render the note editor page --%> --%>
+<%-- This JSP file is used to render the note editor page --%>
 
 <%@ include file="imports.jsp" %>
 
