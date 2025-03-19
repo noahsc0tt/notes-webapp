@@ -2,19 +2,26 @@ package uk.ac.ucl.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import uk.ac.ucl.exceptions.MarkdownParseException;
 
 // Converts Markdown text to HTML through regex matching and replacement
 
 public class MarkdownConverter {
     
     public static String convertToHtml(String markdown) {
-        if (markdown == null) { return ""; }
+        if (markdown == null) {
+            return "";
+        }
         
-        String html = replaceNewlines(markdown);
-        html = processImages(html);
-        html = processLinks(html);
-        
-        return html;
+        try {
+            String html = replaceNewlines(markdown);
+            html = processImages(html);
+            html = processLinks(html);
+            
+            return html;
+        } catch (Exception e) {
+            throw new MarkdownParseException("Error converting markdown to HTML", e);
+        }
     }
     
     private static String replaceNewlines(String text) {
