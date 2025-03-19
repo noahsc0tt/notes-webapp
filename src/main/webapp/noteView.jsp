@@ -1,4 +1,4 @@
-// This JSP renders the note for viewing.
+<%-- This JSP renders the note for viewing. --%>
 
 <%@ include file="imports.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
