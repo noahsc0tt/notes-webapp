@@ -1,2 +1,6 @@
+<<<<<<< Updated upstream
 Mar 19, 2025 7:31:21 PM uk.ac.ucl.main.Main main
+=======
+Mar 19, 2025 7:25:47 PM uk.ac.ucl.main.Main main
+>>>>>>> Stashed changes
 INFO: Server started successfully on port 8080
