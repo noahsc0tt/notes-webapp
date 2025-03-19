@@ -3,6 +3,6 @@
 <link rel="stylesheet" type="text/css" href="styles.css"/>
 
 <form action="/delete_note" method="POST">
-  <input type="hidden" name="key" value="<%=request.getAttribute("key")%>">
+  <input type="hidden" name="key" value="${param.key}">
   <button type="submit">Delete Note</button>
 </form>
