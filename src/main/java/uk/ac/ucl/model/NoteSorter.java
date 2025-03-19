@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+// This class is responsible for sorting the notes by different criteria
 
 public class NoteSorter
 {
+    // The four lists of notes, sorted by different criteria, maintained for caching
     private static List<Map.Entry<LocalDateTime, NoteRecord>> mostRecent;
     private static List<Map.Entry<LocalDateTime, NoteRecord>> leastRecent;
     private static List<Map.Entry<LocalDateTime, NoteRecord>> alphabetical;
@@ -22,10 +24,7 @@ public class NoteSorter
     private static boolean alphabeticalUpToDate;
     private static boolean revAlphabeticalUpToDate;
     
-    static
-    {
-        outOfDate();
-    }
+    static { outOfDate(); }
     
     public static void outOfDate()
     {

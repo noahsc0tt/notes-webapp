@@ -1,3 +1,5 @@
+// This file is used to import all the necessary classes and stylesheets for the JSP files
+
 <link rel="stylesheet" type="text/css" href="/styles.css"/>
 
 <%@ page import="java.util.List" %>

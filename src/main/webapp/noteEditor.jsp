@@ -1,3 +1,5 @@
+// This JSP file is used to render the note editor page
+
 <%@ include file="imports.jsp" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,6 +17,7 @@
 
   <h1>${title} Note</h1>
 
+   // The form is used to submit the note name and body to the server
   <form action="/save_note" method="POST" enctype="multipart/form-data">
       <label for="name">Note Title:</label>
       <input type="text" id="name" name="name" size="40" value="${name}"><br>

@@ -1,3 +1,5 @@
+// This file contains functions for inserting links and images into the note editor
+
 function insertTextAtCursor(template) {
     const textarea = document.getElementsByName("body")[0];
     const startPosition = textarea.selectionStart;

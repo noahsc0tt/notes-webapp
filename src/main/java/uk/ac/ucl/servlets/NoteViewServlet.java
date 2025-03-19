@@ -9,6 +9,7 @@ import uk.ac.ucl.util.MarkdownConverter;
 
 import java.io.IOException;
 
+// This servlet is responsible for preparing the note view page.
 
 @WebServlet("/note_view")
 public class NoteViewServlet extends AbstractJSPServlet

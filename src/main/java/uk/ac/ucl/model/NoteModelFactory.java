@@ -1,6 +1,6 @@
 package uk.ac.ucl.model;
 
-import java.io.IOException;
+// This class is a factory class that creates a NoteModel object
 
 public class NoteModelFactory
 {

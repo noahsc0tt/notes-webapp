@@ -3,6 +3,8 @@ package uk.ac.ucl.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// Converts Markdown text to HTML through regex matching and replacement
+
 public class MarkdownConverter {
     
     public static String convertToHtml(String markdown) {

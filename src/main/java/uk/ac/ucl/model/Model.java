@@ -6,14 +6,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+// The Model class is the main interface for the controller to interact with the model
+
 public class Model
 {
     private static final NoteModel noteModel;
     
+    // Static block to initialise the noteModel through the factory
     static { noteModel = NoteModelFactory.getNoteModel(); }
     
-    public static LinkedHashMap<LocalDateTime, NoteRecord> getNoteMap() { return noteModel.getNoteData(); }
-    public static NoteRecord getNoteRecord(LocalDateTime key){ return noteModel.getNoteData(key); }
+    public static LinkedHashMap<LocalDateTime, NoteRecord> getNoteMap() { return noteModel.getNoteMap(); }
+    public static NoteRecord getNoteRecord(LocalDateTime key){ return noteModel.getNoteRecord(key); }
     
     
     public static void addNote(String name, String body)
@@ -35,7 +38,7 @@ public class Model
     private static void sendUpdates()
     {
         NoteSorter.outOfDate();
-        JSONHandler.writeJSON(noteModel.getNoteData());
+        JSONHandler.writeJSON(noteModel.getNoteMap());
     }
     
     public static List<Map.Entry<LocalDateTime, NoteRecord>> searchFor(String query, Iterable<Map.Entry<LocalDateTime, NoteRecord>> notes)

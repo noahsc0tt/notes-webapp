@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import uk.ac.ucl.model.NoteRecord;
 
+// This class is responsible for reading and writing to/from the JSON file
 
 public class JSONHandler
 {

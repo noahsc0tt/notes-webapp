@@ -6,10 +6,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.util.DateFormatter;
-
-
 import java.io.IOException;
 
+// This servlet is used to delete a note
 
 @WebServlet("/delete_note")
 public class DeleteNoteServlet extends AbstractJSPServlet

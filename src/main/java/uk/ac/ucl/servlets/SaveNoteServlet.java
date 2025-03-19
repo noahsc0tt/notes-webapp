@@ -15,11 +15,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Collection;
 import java.io.IOException;
 
+// This servlet is responsible for saving a note.
+
 @WebServlet("/save_note")
-@MultipartConfig(
+@MultipartConfig( // Configure the servlet to handle file uploads
         fileSizeThreshold = 1024 * 1024, // 1MB
         maxFileSize = 1024 * 1024 * 10,  // 10MB
         maxRequestSize = 1024 * 1024 * 15 // 15MB
@@ -29,21 +30,18 @@ public class SaveNoteServlet extends AbstractJSPServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Extract form data
         String key = request.getParameter("key");
         String name = request.getParameter("name");
         String body = request.getParameter("body");
         
-        // Process image upload if present
         processImageUpload(request);
         
-        // Save or update the note
         saveNote(key, name, body);
         
-        // Redirect to the notes list page
         response.sendRedirect(request.getContextPath() + "/notes_list");
     }
     
+    // Calls other methods to handle uploading the image file
     private void processImageUpload(HttpServletRequest request) throws ServletException, IOException {
         Part filePart = request.getPart("imageFile");
         if (!isValidImageUpload(filePart)) {

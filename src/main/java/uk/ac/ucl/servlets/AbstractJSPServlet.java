@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+// Abstract class to be extended by all JSP servlets, providing a method to invoke a JSP page
+
 public abstract class AbstractJSPServlet extends HttpServlet
 {
     protected void invokeJSP(String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

@@ -10,7 +10,7 @@ import uk.ac.ucl.model.NoteRecord;
 
 import java.io.IOException;
 
-
+// This servlet is responsible for preparing the note editor.
 
 @WebServlet("/note_editor")
 public class NoteEditorServlet extends AbstractJSPServlet
@@ -20,7 +20,7 @@ public class NoteEditorServlet extends AbstractJSPServlet
         String key = request.getParameter("key");
         NoteRecord note;
         
-        if (key == null) { note = new NoteRecord("Enter note title", "Enter note body"); }
+        if (key == null) { note = new NoteRecord("Enter note title", "Enter note body"); } // default prompt text
         else { note = Model.getNoteRecord(DateFormatter.stringToDate(key)); }
         
         request.setAttribute("name", note.name());

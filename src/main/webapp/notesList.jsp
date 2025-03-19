@@ -1,3 +1,5 @@
+// This JSP file is used to display the list of notes, with searching and sorting options.
+
 <%@ include file="imports.jsp" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,6 +12,8 @@
 <div class="main">
   <h1>Notes List:</h1>
 
+
+  // This form is used to sort the notes by different criteria.
   <form action="/notes_list" method="GET">
     <label for="sort">Sort by: </label>
     <select name="sort" onchange="this.form.submit()">
@@ -33,6 +37,7 @@
     </select>
   </form>
 
+    // This form is used to search for notes
   <form action="/notes_list" method="GET">
     <label for="search">Search: </label>
     <input type="text" name="search" value=${param.search}>
@@ -43,6 +48,7 @@
      <% } %>
   </form>
 
+  // This section displays the list of notes with links to view them
   <%
     List<Map.Entry<LocalDateTime, NoteRecord>> noteList = (List<Map.Entry<LocalDateTime, NoteRecord>>) request.getAttribute("noteList");
     if (noteList.size() !=0) {
