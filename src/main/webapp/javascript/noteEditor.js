@@ -11,7 +11,7 @@ function insertTextAtCursor(template) {
 
 function insertLink() {
     const url = prompt("Enter URL:", "https://");
-    const text = prompt("Enter link text:", "Link Text");
+    const text = prompt("Enter link text:", "");
 
     if (url && text) { insertTextAtCursor("[" + text + "](" + url + ")"); }
 }
@@ -21,8 +21,8 @@ function insertImage() { document.getElementById('imageUpload').click(); }
 function handleImageUpload() {
     const fileInput = document.getElementById('imageUpload');
     const file = fileInput.files[0];
-
-    if (file) { insertTextAtCursor("![" + file.name + "](img/" + file.name + ")"); }
+    const label = prompt("Enter image label for searching:", file.name);
+    if (file) { insertTextAtCursor("![" + label + "](img/" + file.name + ")"); }
 }
 
 // Add event listener for file upload

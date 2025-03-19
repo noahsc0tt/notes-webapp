@@ -10,9 +10,10 @@ public class NoteSearcher
     public static List<Map.Entry<LocalDateTime, NoteRecord>> searchNotes(String query, Iterable<Map.Entry<LocalDateTime, NoteRecord>> noteList)
     {
         List<Map.Entry<LocalDateTime, NoteRecord>> searchResults = new ArrayList<>();
+        query = query.toLowerCase();
         for (Map.Entry<LocalDateTime, NoteRecord> entry : noteList)
         {
-            if (entry.getValue().name().toLowerCase().contains(query.toLowerCase()) || entry.getValue().body().toLowerCase().contains(query.toLowerCase()))
+            if (entry.getValue().name().toLowerCase().contains(query) || entry.getValue().body().toLowerCase().contains(query))
             {
                 searchResults.add(entry);
             }
