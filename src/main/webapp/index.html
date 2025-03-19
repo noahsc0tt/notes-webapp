@@ -1,25 +1,26 @@
-<!-- This is the main page of the Notes App. It contains links to add a note and view the list of notes. -->
+<!-- This is the home page of the Notes App. It contains links to add a note and view the list of notes. -->
 
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="/styles.css"/>
 <html lang="en">
 <head>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
   <meta charset="UTF-8">
   <title>Notes App</title>
 </head>
 <body>
-<h2>Welcome to the Notes App</h2>
+<div class="container">
+  <h1>Welcome to the Notes App</h1>
 
-<nav>
-  <ul>
-    <li>
-      <a href="note_editor">Add Note</a>
-    </li>
-    <li>
-      <a href="notes_list">List of Notes</a>
-    </li>
-  </ul>
-</nav>
-
+  <nav class="home-nav">
+    <ul>
+      <li>
+        <a href="note_editor" class="btn">Add Note</a>
+      </li>
+      <li>
+        <a href="notes_list" class="btn">List of Notes</a>
+      </li>
+    </ul>
+  </nav>
+</div>
 </body>
 </html>

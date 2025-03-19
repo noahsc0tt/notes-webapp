@@ -5,6 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
   <title>Note Editor</title>
   <script src="javascript/noteEditor.js"></script>
 </head>
@@ -18,7 +19,7 @@
   <h1>${title} Note</h1>
 
    <%-- The form is used to submit the note name and body to the server --%>
-  <form action="/save_note" method="POST" enctype="multipart/form-data">
+  <form class="note-editor-form" action="/save_note" method="POST" enctype="multipart/form-data">
       <label for="name">Note Title:</label>
       <input type="text" id="name" name="name" size="40" value="${name}"><br>
       <label for="body">Note body:</label>
@@ -35,6 +36,6 @@
     <jsp:include page="deleteNoteButton.jsp" />
   <%}%>
 
-  <a href="/index.html">Exit to home</a>
+  <br><a href="/index.html">Exit to home</a>
 </body>
 </html>

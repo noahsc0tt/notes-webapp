@@ -1,6 +1,4 @@
-<%-- This file is used to import all the necessary classes and stylesheets for the JSP files --%>
-
-<link rel="stylesheet" type="text/css" href="/styles.css"/>
+<%-- This file is used to import all the necessary classes for the JSP files --%>
 
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDateTime" %>

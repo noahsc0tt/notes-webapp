@@ -6,6 +6,7 @@
 
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
   <title>Notes List</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
 
 
   <%-- This form is used to sort the notes by different criteria. --%>
-  <form action="/notes_list" method="GET">
+  <form class="general-form" action="/notes_list" method="GET">
     <label for="sort">Sort by: </label>
     <select name="sort" onchange="this.form.submit()">
         <%
@@ -38,7 +39,7 @@
   </form>
 
     <%-- This form is used to search for notes --%>
-  <form action="/notes_list" method="GET">
+  <form class="general-form" action="/notes_list" method="GET">
     <label for="search">Search: </label>
     <input type="text" name="search" value=${param.search}>
     <input type="submit" value="Search">
@@ -57,14 +58,17 @@
           <%
             for (Map.Entry<LocalDateTime, NoteRecord> entry: noteList)
             {%>
-                <li><a href="note_view?key=<%=java.net.URLEncoder.encode(DateFormatter.dateToString(entry.getKey()))%>"><%=entry.getValue().name()%></a></li>
+                <li><a href="note_view?key=<%=java.net.URLEncoder.encode(DateFormatter.dateToString(entry.getKey()))%>">• <%=entry.getValue().name()%></a></li>
          <%}
     } else {
     %>
       <p>No notes.</p>
     <%}%>
         </ul>
-  <a href="note_editor">Add note</a><br>
+  <div class="buttons-container">
+      <form action="note_editor" method="GET">
+        <button type="submit" class="btn">Add note</button>
+      </form>  </div>
   <a href="/index.html">Back to Home</a>
 </div>
 
