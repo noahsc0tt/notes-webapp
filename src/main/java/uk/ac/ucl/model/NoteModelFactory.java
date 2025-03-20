@@ -2,9 +2,9 @@ package uk.ac.ucl.model;
 
 // This class is a factory class that creates a NoteModel object
 
-public class NoteModelFactory
+class NoteModelFactory
 {
-    private static NoteModel model;
+    private static NoteModel model = null;
     
     public static NoteModel getNoteModel()
     {

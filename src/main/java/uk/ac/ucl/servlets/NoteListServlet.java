@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.NoteRecord;
-import uk.ac.ucl.model.NoteSorter;
+import uk.ac.ucl.util.NoteSorter;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

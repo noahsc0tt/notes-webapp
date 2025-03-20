@@ -3,6 +3,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import uk.ac.ucl.exceptions.MarkdownParseException;
 import uk.ac.ucl.model.*;
 import uk.ac.ucl.util.DateFormatter;
 import uk.ac.ucl.util.MarkdownConverter;
@@ -19,7 +20,11 @@ public class NoteViewServlet extends AbstractJSPServlet
         String key = java.net.URLDecoder.decode(request.getParameter("key"), "UTF-8");
         NoteRecord note = Model.getNoteRecord(DateFormatter.stringToDate(key));
         request.setAttribute("name", note.name());
-        request.setAttribute("body", MarkdownConverter.convertToHtml(note.body()));
+        
+        String body;
+        try { body = MarkdownConverter.convertToHtml(note.body()); }
+        catch (MarkdownParseException e) { body = note.body(); }
+        request.setAttribute("body", body);
         
         invokeJSP("/noteView.jsp", request, response);
     }

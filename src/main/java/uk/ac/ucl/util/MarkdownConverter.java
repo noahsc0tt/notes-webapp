@@ -13,27 +13,25 @@ public class MarkdownConverter {
             return "";
         }
         
-        try {
-            String html = replaceNewlines(markdown);
+        try
+        {
+            String html = markdown.replaceAll("\n", "<br>");
             html = processImages(html);
             html = processLinks(html);
             
             return html;
-        } catch (Exception e) {
-            throw new MarkdownParseException("Error converting markdown to HTML", e);
         }
+        catch (Exception e) { throw new MarkdownParseException("Error converting markdown to HTML", e); }
     }
     
-    private static String replaceNewlines(String text) {
-        return text.replaceAll("\n", "<br>");
-    }
-    
-    private static String processImages(String html) {
+    private static String processImages(String html)
+    {
         Pattern imagePattern = Pattern.compile("!\\[(.*?)\\]\\((.*?)\\)");
         Matcher imageMatcher = imagePattern.matcher(html);
         StringBuffer sb = new StringBuffer();
         
-        while (imageMatcher.find()) {
+        while (imageMatcher.find())
+        {
             String alt = escapeQuotes(imageMatcher.group(1));
             String src = normalizePath(imageMatcher.group(2));
             
@@ -44,24 +42,25 @@ public class MarkdownConverter {
         return sb.toString();
     }
     
-    private static String normalizePath(String src) {
-        if (!src.startsWith("http") && !src.startsWith("/")) {
-            src = "/" + src;
-        }
+    private static String normalizePath(String src)
+    {
+        if (!src.startsWith("http") && !src.startsWith("/")) src = "/" + src;
         return escapeQuotes(src);
     }
     
-    private static String createImageTag(String src, String alt) {
-        return "<img src=\"" + src + "\" alt=\"" + alt +
-                "\" style=\"max-width:50%; height:auto;\">";
+    private static String createImageTag(String src, String alt)
+    {
+        return "<img src=\"" + src + "\" alt=\"" + alt + "\" style=\"max-width:50%; height:auto;\">";
     }
     
-    private static String processLinks(String html) {
+    private static String processLinks(String html)
+    {
         Pattern linkPattern = Pattern.compile("\\[(.*?)\\]\\((.*?)\\)");
         Matcher linkMatcher = linkPattern.matcher(html);
         StringBuffer sb = new StringBuffer();
         
-        while (linkMatcher.find()) {
+        while (linkMatcher.find())
+        {
             String text = linkMatcher.group(1);
             String url = escapeQuotes(linkMatcher.group(2));
             
@@ -72,11 +71,10 @@ public class MarkdownConverter {
         return sb.toString();
     }
     
-    private static String createLinkTag(String url, String text) {
+    private static String createLinkTag(String url, String text)
+    {
         return "<a href=\"" + url + "\" target=\"_blank\">" + text + "</a>";
     }
     
-    private static String escapeQuotes(String text) {
-        return text.replaceAll("\"", "&quot;");
-    }
+    private static String escapeQuotes(String text) { return text.replaceAll("\"", "&quot;"); }
 }

@@ -1,9 +1,10 @@
-package uk.ac.ucl.model;
+package uk.ac.ucl.util;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import uk.ac.ucl.model.NoteRecord;
 
 // This class is responsible for searching notes based on a string query
 

@@ -16,13 +16,13 @@ public class JSONHandler {
     private final static ObjectMapper objectMapper = new ObjectMapper();
     private final static String filePath = "data/noteIndex.json";
     
-    public static LinkedHashMap<LocalDateTime, NoteRecord> readJSON() {
+    public static LinkedHashMap<LocalDateTime, NoteRecord> readJSON() throws JSONFileNotFoundException, JSONParseException
+    {
         LinkedHashMap<LocalDateTime, NoteRecord> noteData = new LinkedHashMap<>();
+
+        File file = new File(filePath);
+        if (!file.exists()) { throw new JSONFileNotFoundException("JSON file not found: " + filePath); }
         try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                throw new JSONFileNotFoundException("JSON file not found: " + filePath);
-            }
             JsonNode rootNode = objectMapper.readTree(file);
             rootNode.fields().forEachRemaining(field -> {
                 LocalDateTime created = DateFormatter.stringToDate(field.getKey());
@@ -32,15 +32,14 @@ public class JSONHandler {
                 NoteRecord note = new NoteRecord(name, body);
                 noteData.put(created, note);
             });
-        } catch (JSONFileNotFoundException e) {
-            throw e;
-        } catch (IOException e) {
-            throw new JSONParseException("Error parsing JSON file: " + filePath, e);
         }
+        catch (IOException e) { throw new JSONParseException("Error parsing JSON file: " + filePath, e); }
+       
         return noteData;
     }
     
-    public static void writeJSON(LinkedHashMap<LocalDateTime, NoteRecord> noteData) {
+    public static void writeJSON(LinkedHashMap<LocalDateTime, NoteRecord> noteData) throws JSONFileNotFoundException, JSONWriteException
+    {
         ObjectNode rootNode = objectMapper.createObjectNode();
         noteData.forEach((created, value) -> {
             String createdString = DateFormatter.dateToString(created);
@@ -51,13 +50,9 @@ public class JSONHandler {
         });
         try {
             File file = new File(filePath);
-            File dir = file.getParentFile();
-            if (!dir.exists() && !dir.mkdirs()) {
-                throw new JSONWriteException("Could not create directory: " + dir.getAbsolutePath());
-            }
+            if (!file.exists()) { throw new JSONFileNotFoundException("JSON file not found: " + filePath); }
             objectMapper.writeValue(file, rootNode);
-        } catch (IOException e) {
-            throw new JSONWriteException("Error writing to JSON file: " + filePath, e);
         }
+        catch (IOException e) { throw new JSONWriteException("Error writing to JSON file: " + filePath, e); }
     }
 }

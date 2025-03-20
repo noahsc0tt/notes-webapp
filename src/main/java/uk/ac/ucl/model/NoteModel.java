@@ -1,20 +1,32 @@
 package uk.ac.ucl.model;
 
+import uk.ac.ucl.exceptions.JSONFileNotFoundException;
+import uk.ac.ucl.exceptions.JSONParseException;
 import uk.ac.ucl.util.JSONHandler;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashMap;
 
 // This class is responsible for creating, retrieving, updating, and deleting notes
 
-public class NoteModel
+class NoteModel
 {
     private final LinkedHashMap<LocalDateTime, NoteRecord> noteData;
     
-    public NoteModel()
+    // Package-private constructor so that only the factory creates a NoteModel object
+    NoteModel()
     {
-        noteData = JSONHandler.readJSON();
+        LinkedHashMap<LocalDateTime, NoteRecord> tempData;
+        try { tempData = JSONHandler.readJSON(); }
+        catch (JSONFileNotFoundException | JSONParseException e)
+        {
+            e.printStackTrace();
+            tempData = new LinkedHashMap<>();
+        }
+        noteData = tempData;
+        
     }
     
     public LinkedHashMap<LocalDateTime, NoteRecord> getNoteMap() { return noteData; }

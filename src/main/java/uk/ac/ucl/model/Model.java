@@ -1,12 +1,16 @@
 package uk.ac.ucl.model;
 
+import uk.ac.ucl.exceptions.JSONFileNotFoundException;
+import uk.ac.ucl.exceptions.JSONWriteException;
 import uk.ac.ucl.util.JSONHandler;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import uk.ac.ucl.util.NoteSearcher;
+import uk.ac.ucl.util.NoteSorter;
 
-// The Model class is the main interface for the controller to interact with the model
+// The Model class is the main interface for the controller to interact with the note data through the repository pattern
 
 public class Model
 {
@@ -38,7 +42,8 @@ public class Model
     private static void sendUpdates()
     {
         NoteSorter.outOfDate();
-        JSONHandler.writeJSON(noteModel.getNoteMap());
+        try { JSONHandler.writeJSON(noteModel.getNoteMap()); }
+        catch (JSONFileNotFoundException | JSONWriteException e) { e.printStackTrace(); }
     }
     
     public static List<Map.Entry<LocalDateTime, NoteRecord>> searchFor(String query, Iterable<Map.Entry<LocalDateTime, NoteRecord>> notes)

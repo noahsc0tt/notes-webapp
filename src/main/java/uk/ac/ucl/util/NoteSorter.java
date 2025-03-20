@@ -1,6 +1,5 @@
-package uk.ac.ucl.model;
+package uk.ac.ucl.util;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,6 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import uk.ac.ucl.model.NoteRecord;
 
 // This class is responsible for sorting the notes by different criteria
 
