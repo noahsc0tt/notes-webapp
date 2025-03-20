@@ -4,7 +4,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import uk.ac.ucl.model.Model;
+import uk.ac.ucl.model.NoteRepository;
 import uk.ac.ucl.model.NoteRecord;
 import uk.ac.ucl.util.NoteSorter;
 
@@ -29,14 +29,14 @@ public class NoteListServlet extends AbstractJSPServlet
     
     String searchQuery = request.getParameter("search");
     
-    if (searchQuery != null) { noteList = Model.searchFor(searchQuery, noteList); } //filter list by search query if present
+    if (searchQuery != null) { noteList = NoteRepository.searchFor(searchQuery, noteList); } //filter list by search query if present
     request.setAttribute("noteList", noteList);
     invokeJSP("/notesList.jsp", request, response);
   }
   
   private List<Map.Entry<LocalDateTime, NoteRecord>> sortNoteList(String sortChoice)
   {
-      LinkedHashMap<LocalDateTime, NoteRecord> noteMap = Model.getNoteMap();
+      LinkedHashMap<LocalDateTime, NoteRecord> noteMap = NoteRepository.getNoteMap();
       return switch (sortChoice)
       {
           case "leastRecent" -> NoteSorter.leastRecent(noteMap);

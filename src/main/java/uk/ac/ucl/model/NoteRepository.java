@@ -10,9 +10,9 @@ import java.util.Map;
 import uk.ac.ucl.util.NoteSearcher;
 import uk.ac.ucl.util.NoteSorter;
 
-// The Model class is the main interface for the controller to interact with the note data through the repository pattern
+// This class is the main interface for the controller to interact with the note data through the repository pattern
 
-public class Model
+public class NoteRepository
 {
     private static final NoteModel noteModel;
     
@@ -39,15 +39,15 @@ public class Model
         sendUpdates();
     }
     
+    public static List<Map.Entry<LocalDateTime, NoteRecord>> searchFor(String query, Iterable<Map.Entry<LocalDateTime, NoteRecord>> notes)
+    {
+        return NoteSearcher.searchNotes(query, notes);
+    }
+    
     private static void sendUpdates()
     {
         NoteSorter.outOfDate();
         try { JSONHandler.writeJSON(noteModel.getNoteMap()); }
         catch (JSONFileNotFoundException | JSONWriteException e) { e.printStackTrace(); }
-    }
-    
-    public static List<Map.Entry<LocalDateTime, NoteRecord>> searchFor(String query, Iterable<Map.Entry<LocalDateTime, NoteRecord>> notes)
-    {
-        return NoteSearcher.searchNotes(query, notes);
     }
 }

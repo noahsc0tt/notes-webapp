@@ -6,13 +6,11 @@ import uk.ac.ucl.exceptions.MarkdownParseException;
 
 // Converts Markdown text to HTML through regex matching and replacement
 
-public class MarkdownConverter {
+public class MarkdownConverter
+{
     
-    public static String convertToHtml(String markdown) {
-        if (markdown == null) {
-            return "";
-        }
-        
+    public static String convertToHtml(String markdown) throws MarkdownParseException{
+        if (markdown == null) return "";
         try
         {
             String html = markdown.replaceAll("\n", "<br>");

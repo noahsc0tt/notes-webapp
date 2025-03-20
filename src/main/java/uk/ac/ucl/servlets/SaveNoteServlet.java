@@ -79,9 +79,9 @@ public class SaveNoteServlet extends AbstractJSPServlet {
     
     private void saveNote(String key, String name, String body) {
         if (key == null || key.isEmpty()) {
-            Model.addNote(name, body);
+            NoteRepository.addNote(name, body);
         } else {
-            Model.updateNote(DateFormatter.stringToDate(key), name, body);
+            NoteRepository.updateNote(DateFormatter.stringToDate(key), name, body);
         }
     }
 }

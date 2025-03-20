@@ -3,8 +3,6 @@ package uk.ac.ucl.model;
 import uk.ac.ucl.exceptions.JSONFileNotFoundException;
 import uk.ac.ucl.exceptions.JSONParseException;
 import uk.ac.ucl.util.JSONHandler;
-
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashMap;
@@ -26,11 +24,10 @@ class NoteModel
             tempData = new LinkedHashMap<>();
         }
         noteData = tempData;
-        
     }
     
     public LinkedHashMap<LocalDateTime, NoteRecord> getNoteMap() { return noteData; }
-    public NoteRecord getNoteRecord(LocalDateTime key){ return noteData.get(key); }
+    public NoteRecord getNoteRecord(LocalDateTime key) { return noteData.get(key); }
     
     public void addNote(String name, String body)
     {
@@ -44,9 +41,6 @@ class NoteModel
         noteData.put(key, newNote);
     }
     
-    public void deleteNote(LocalDateTime key)
-    {
-        noteData.remove(key);
-    }
+    public void deleteNote(LocalDateTime key) { noteData.remove(key); }
     
 }

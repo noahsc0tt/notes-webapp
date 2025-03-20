@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.util.DateFormatter;
-import uk.ac.ucl.model.Model;
+import uk.ac.ucl.model.NoteRepository;
 import uk.ac.ucl.model.NoteRecord;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class NoteEditorServlet extends AbstractJSPServlet
         NoteRecord note;
         
         if (key == null) { note = new NoteRecord("Enter note title", "Enter note body"); } // default prompt text
-        else { note = Model.getNoteRecord(DateFormatter.stringToDate(key)); }
+        else { note = NoteRepository.getNoteRecord(DateFormatter.stringToDate(key)); }
         
         request.setAttribute("name", note.name());
         request.setAttribute("body", note.body());
