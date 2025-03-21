@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import uk.ac.ucl.util.NoteSearcher;
-import uk.ac.ucl.util.NoteSorter;
+import uk.ac.ucl.util.sort.NoteSorter;
 
 // This class is the main interface for the controller to interact with the note data through the repository pattern
 

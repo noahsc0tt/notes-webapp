@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.NoteRepository;
 import uk.ac.ucl.model.NoteRecord;
-import uk.ac.ucl.util.NoteSorter;
+import uk.ac.ucl.util.sort.NoteSorter;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -37,13 +37,15 @@ public class NoteListServlet extends AbstractJSPServlet
   private List<Map.Entry<LocalDateTime, NoteRecord>> sortNoteList(String sortChoice)
   {
       LinkedHashMap<LocalDateTime, NoteRecord> noteMap = NoteRepository.getNoteMap();
-      return switch (sortChoice)
+      NoteSorter.SortType sortType = switch (sortChoice)
       {
-          case "leastRecent" -> NoteSorter.leastRecent(noteMap);
-          case "alphabetical" -> NoteSorter.alphabetical(noteMap);
-          case "revAlphabetical" -> NoteSorter.revAlphabetical(noteMap);
-          case "mostRecent" -> NoteSorter.mostRecent(noteMap);
+          case "leastRecent" -> NoteSorter.SortType.LEAST_RECENT;
+          case "mostRecent" -> NoteSorter.SortType.MOST_RECENT;
+          case "alphabetical" -> NoteSorter.SortType.ALPHABETICAL;
+          case "revAlphabetical" -> NoteSorter.SortType.REVERSE_ALPHABETICAL;
+          
           default -> throw new IllegalArgumentException("Invalid sort choice");
       };
+      return NoteSorter.sortNotes(noteMap, sortType);
   }
 }
