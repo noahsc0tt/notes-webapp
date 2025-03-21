@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 import uk.ac.ucl.model.NoteRecord;
 
-public interface SortStrategy
+// Strategy to sort notes
+
+interface SortStrategy
 {
     List<Map.Entry<LocalDateTime, NoteRecord>> sort(LinkedHashMap<LocalDateTime, NoteRecord> noteMap);
     List<Map.Entry<LocalDateTime, NoteRecord>> cached();

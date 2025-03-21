@@ -32,9 +32,7 @@
       <button type="submit">Save Note</button>
   </form>
 
-  <% if (key != null) { %>
-    <jsp:include page="deleteNoteButton.jsp" />
-  <%}%>
+  <% if (key != null) { %> <jsp:include page="deleteNoteButton.jsp" /> <%}%>
 
   <br><a href="/index.html">Exit to home</a>
 </body>

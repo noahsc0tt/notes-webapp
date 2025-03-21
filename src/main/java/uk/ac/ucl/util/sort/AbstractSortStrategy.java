@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import uk.ac.ucl.model.NoteRecord;
 
+// Abstract class to implement cache management functionality for all sorting strategies
+
 abstract class AbstractSortStrategy implements SortStrategy
 {
     private boolean upToDate = false;

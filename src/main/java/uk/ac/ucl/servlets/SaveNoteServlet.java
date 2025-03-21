@@ -25,31 +25,25 @@ import java.io.IOException;
         maxFileSize = 1024 * 1024 * 10,  // 10MB
         maxRequestSize = 1024 * 1024 * 15 // 15MB
 )
-public class SaveNoteServlet extends AbstractJSPServlet {
+public class SaveNoteServlet extends AbstractJSPServlet
+{
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String key = request.getParameter("key");
-        String name = request.getParameter("name");
-        String body = request.getParameter("body");
-        
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         processImageUpload(request);
-        
-        saveNote(key, name, body);
-        
+        saveNote(request.getParameter("key"), request.getParameter("name"), request.getParameter("body"));
         response.sendRedirect(request.getContextPath() + "/notes_list");
     }
     
     // Calls other methods to handle uploading the image file
-    private void processImageUpload(HttpServletRequest request) throws ServletException, IOException {
+    private void processImageUpload(HttpServletRequest request) throws ServletException, IOException
+    {
         Part filePart = request.getPart("imageFile");
-        if (!isValidImageUpload(filePart)) {
-            return;
-        }
+        if (!isValidImageUpload(filePart)) return;
         
-        String fileName = getFileName(filePart);
-        File imgDir = createImageDirectory(request);
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        File imgDir = new File(request.getServletContext().getRealPath(""), "img");
         saveUploadedFile(filePart, imgDir, fileName);
     }
     
@@ -57,31 +51,18 @@ public class SaveNoteServlet extends AbstractJSPServlet {
         return filePart != null && filePart.getSize() > 0;
     }
     
-    private String getFileName(Part filePart) {
-        return Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-    }
-    
-    private File createImageDirectory(HttpServletRequest request) {
-        String appPath = request.getServletContext().getRealPath("");
-        File imgDir = new File(appPath, "img");
-        if (!imgDir.exists()) {
-            imgDir.mkdir();
-        }
-        return imgDir;
-    }
-    
-    private void saveUploadedFile(Part filePart, File imgDir, String fileName) throws IOException {
-        try (InputStream fileContent = filePart.getInputStream()) {
+    private void saveUploadedFile(Part filePart, File imgDir, String fileName) throws IOException
+    {
+        try (InputStream fileContent = filePart.getInputStream())
+        {
             Path targetPath = Paths.get(imgDir.getAbsolutePath(), fileName);
             Files.copy(fileContent, targetPath, StandardCopyOption.REPLACE_EXISTING);
         }
     }
     
-    private void saveNote(String key, String name, String body) {
-        if (key == null || key.isEmpty()) {
-            NoteRepository.addNote(name, body);
-        } else {
-            NoteRepository.updateNote(DateFormatter.stringToDate(key), name, body);
-        }
+    private void saveNote(String key, String name, String body)
+    {
+        if (key == null || key.isEmpty()) { NoteRepository.addNote(name, body); }
+        else { NoteRepository.updateNote(DateFormatter.stringToDate(key), name, body); }
     }
 }

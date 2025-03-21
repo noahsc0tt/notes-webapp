@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 import uk.ac.ucl.model.NoteRecord;
 
-public class AlphabeticalStrategy extends AbstractSortStrategy
+// Strategy to sort notes alphabetically
+
+class AlphabeticalStrategy extends AbstractSortStrategy
 {
     @Override
     public void applySort(List<Map.Entry<LocalDateTime, NoteRecord>> noteList)

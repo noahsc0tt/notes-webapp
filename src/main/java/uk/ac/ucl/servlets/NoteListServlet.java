@@ -29,7 +29,7 @@ public class NoteListServlet extends AbstractJSPServlet
     
     String searchQuery = request.getParameter("search");
     
-    if (searchQuery != null) { noteList = NoteRepository.searchFor(searchQuery, noteList); } //filter list by search query if present
+    if (searchQuery != null) noteList = NoteRepository.searchFor(searchQuery, noteList); //filter list by search query if present
     request.setAttribute("noteList", noteList);
     invokeJSP("/notesList.jsp", request, response);
   }

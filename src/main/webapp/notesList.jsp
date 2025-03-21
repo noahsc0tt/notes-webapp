@@ -32,9 +32,10 @@
                 <option value="<%= label.getKey() %>" <%= label.getKey().equals(selectedSort) ? "selected" : "" %>><%= label.getValue() %></option>
             <%}%>
 
-            <% if (request.getParameter("search") != null && !request.getParameter("search").isEmpty()) { %>
+            <% if (request.getParameter("search") != null && !request.getParameter("search").isEmpty())
+            { %>
                 <input type="hidden" name="search" value="${param.search}">
-            <% } %>
+            <%}%>
     </select>
   </form>
 
@@ -44,23 +45,26 @@
     <input type="text" name="search" value=${param.search}>
     <input type="submit" value="Search">
 
-   <% if (request.getParameter("sort") != null && !request.getParameter("sort").isEmpty()) { %>
+   <% if (request.getParameter("sort") != null && !request.getParameter("sort").isEmpty())
+   { %>
        <input type="hidden" name="sort" value="${param.sort}">
-     <% } %>
+   <% } %>
   </form>
 
   <%-- This section displays the list of notes with links to view them --%>
   <%
     List<Map.Entry<LocalDateTime, NoteRecord>> noteList = (List<Map.Entry<LocalDateTime, NoteRecord>>) request.getAttribute("noteList");
-    if (noteList.size() !=0) {
-        %>
+    if (noteList.size() !=0)
+    {%>
         <ul>
           <%
             for (Map.Entry<LocalDateTime, NoteRecord> entry: noteList)
             {%>
                 <li><a href="note_view?key=<%=java.net.URLEncoder.encode(DateFormatter.dateToString(entry.getKey()))%>">• <%=entry.getValue().name()%></a></li>
          <%}
-    } else {
+    }
+    else
+    {
     %>
       <p>No notes.</p>
     <%}%>

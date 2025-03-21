@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 import uk.ac.ucl.model.NoteRecord;
 
-public class ReverseAlphabeticalStrategy extends AbstractSortStrategy
+// Strategy to sort notes reverse alphabetically
+
+class ReverseAlphabeticalStrategy extends AbstractSortStrategy
 {
     @Override
     public void applySort(List<Map.Entry<LocalDateTime, NoteRecord>> noteList)

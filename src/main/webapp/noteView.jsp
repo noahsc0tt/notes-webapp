@@ -10,8 +10,9 @@
 </head>
 <body>
 
-  <h1><%=request.getAttribute("name")%></h1>
-  <div><%=request.getAttribute("body")%></div>
+  <h1>${name}</h1>
+  <div>${body}</div>
+
 
   <div class="buttons-container">
 

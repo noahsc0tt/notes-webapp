@@ -5,7 +5,7 @@ import java.util.*;
 
 import uk.ac.ucl.model.NoteRecord;
 
-// This class is responsible for sorting the notes by different criteria
+// This class provides public methods and an enum responsible for sorting the notes by different criteria
 
 public class NoteSorter
 {
@@ -29,11 +29,10 @@ public class NoteSorter
     
     public static void outOfDate() { strategies.values().forEach(SortStrategy::markOutOfDate); }
     
-    public static List<Map.Entry<LocalDateTime, NoteRecord>> sortNotes(
-            LinkedHashMap<LocalDateTime, NoteRecord> noteMap, SortType sortType)
+    public static List<Map.Entry<LocalDateTime, NoteRecord>> sortNotes(LinkedHashMap<LocalDateTime, NoteRecord> noteMap, SortType sortType)
     {
         SortStrategy strategy = strategies.get(sortType);
-        if (strategy.isUpToDate()) { return strategy.cached(); }
+        if (strategy.isUpToDate()) return strategy.cached();
         return strategy.sort(noteMap);
     }
 }
