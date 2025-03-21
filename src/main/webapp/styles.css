@@ -1,4 +1,5 @@
-:root {
+:root
+{
   --primary-color: #3498db;
   --secondary-color: #2c3e50;
   --accent-color: #1abc9c;
@@ -9,7 +10,8 @@
   --box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-body {
+body
+{
   font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
   line-height: 1.6;
   color: var(--dark-text);
@@ -20,55 +22,64 @@ body {
   margin: 0 auto;
 }
 
-h1, h2, h3 {
+h1, h2, h3
+{
   color: var(--secondary-color);
   margin-top: 0;
   font-weight: 500;
 }
 
-h1 {
+h1
+{
   border-bottom: 2px solid var(--primary-color);
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
 
-a {
+a
+{
   color: var(--primary-color);
   text-decoration: none;
   transition: color 0.2s;
 }
 
-a:hover {
+a:hover
+{
   color: var(--accent-color);
   text-decoration: underline;
 }
 
-nav ul {
+nav ul
+{
   list-style-type: none;
   padding: 0;
   display: flex;
   gap: 15px;
 }
 
-nav li {
+nav li
+{
   background-color: var(--primary-color);
   border-radius: var(--border-radius);
 }
 
-nav a {
+nav a
+{
   color: var(--light-text);
   display: block;
   padding: 10px 15px;
 }
 
-nav a:hover {
+nav a:hover
+{
   color: white;
   background-color: var(--accent-color);
   text-decoration: none;
   border-radius: var(--border-radius);
 }
 
-input, select, textarea, button {
+input, select, textarea, button
+{
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: var(--border-radius);
@@ -77,17 +88,20 @@ input, select, textarea, button {
   font-size: 1rem;
 }
 
-input[type="text"], textarea {
+input[type="text"], textarea
+{
   width: 100%;
   box-sizing: border-box;
 }
 
-textarea {
+textarea
+{
   min-height: 200px;
   resize: vertical;
 }
 
-button, input[type="submit"] {
+button, input[type="submit"]
+{
   background-color: var(--primary-color);
   color: white;
   border: none;
@@ -96,16 +110,19 @@ button, input[type="submit"] {
   transition: background-color 0.2s;
 }
 
-button:hover, input[type="submit"]:hover {
+button:hover, input[type="submit"]:hover
+{
   background-color: var(--accent-color);
 }
 
-ul {
+ul
+{
   list-style-type: none;
   padding: 0;
 }
 
-ul li {
+ul li
+{
   margin-bottom: 10px;
   padding: 10px;
   background: white;
@@ -113,19 +130,22 @@ ul li {
   box-shadow: var(--box-shadow);
 }
 
-ul li a {
+ul li a
+{
   display: block;
   font-weight: 500;
 }
 
-.main {
+.main
+{
   background-color: white;
   padding: 20px;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
 }
 
-form.general-form {
+form.general-form
+{
   margin-bottom: 20px;
   background-color: white;
   padding: 15px;
@@ -133,7 +153,8 @@ form.general-form {
   box-shadow: var(--box-shadow);
 }
 
-form.note-editor-form {
+form.note-editor-form
+{
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -142,39 +163,46 @@ form.note-editor-form {
 }
 
 form.note-editor-form input[type="text"],
-form.note-editor-form textarea {
+form.note-editor-form textarea
+{
   width: 100%;
   box-sizing: border-box;
 }
 
-form.note-editor-form button {
+form.note-editor-form button
+{
   display: inline-block;
   margin-top: 10px;
 }
 
-label {
+label
+{
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
 }
 
-.clearBoth {
+.clearBoth
+{
   clear: both;
 }
 
-.buttons-container {
+.buttons-container
+{
   display: flex;
   gap: 10px;
   margin: 15px 0;
 }
 
-.buttons-container form {
+.buttons-container form
+{
   display: inline-block;
   margin-right: 10px;
   width: auto;
 }
 
-.search-sort-container {
+.search-sort-container
+{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -182,25 +210,22 @@ label {
   margin-bottom: 20px;
 }
 
-.search-sort-container form {
+.search-sort-container form
+{
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  body {
-    padding: 10px;
-  }
+@media (max-width: 768px)
+{
+  body { padding: 10px; }
 
-  nav ul {
-    flex-direction: column;
-  }
+  nav ul { flex-direction: column; }
 
-  .search-sort-container {
-    flex-direction: column;
-  }
+  .search-sort-container { flex-direction: column; }
 }
 
-.container {
+.container
+{
   max-width: 800px;
   margin: 50px auto;
   text-align: center;
@@ -210,7 +235,8 @@ label {
   box-shadow: var(--box-shadow);
 }
 
-.home-nav ul {
+.home-nav ul
+{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -218,18 +244,21 @@ label {
   margin-top: 30px;
 }
 
-.home-nav li {
+.home-nav li
+{
   width: 200px;
   margin-bottom: 15px;
 }
 
-.home-nav a {
+.home-nav a
+{
   font-size: 1.2rem;
   font-weight: 500;
   padding: 15px 20px;
 }
 
-.btn {
+.btn
+{
   display: inline-block;
   background-color: var(--primary-color);
   color: white;
@@ -243,7 +272,8 @@ label {
   transition: background-color 0.2s;
 }
 
-.btn:hover {
+.btn:hover
+{
   background-color: var(--accent-color);
   text-decoration: none;
   color: white;
