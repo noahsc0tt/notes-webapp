@@ -14,12 +14,44 @@ public class MarkdownConverter
         try
         {
             String html = markdown.replaceAll("\n", "<br>");
+            html = processBold(html);
+            html = processItalic(html);
             html = processImages(html);
             html = processLinks(html);
             
             return html;
         }
         catch (Exception e) { throw new MarkdownParseException("Error converting markdown to HTML", e); }
+    }
+    
+    private static String processBold(String html)
+    {
+        Pattern boldPattern = Pattern.compile("\\*\\*(.*?)\\*\\*");
+        Matcher boldMatcher = boldPattern.matcher(html);
+        StringBuffer sb = new StringBuffer();
+        
+        while (boldMatcher.find())
+        {
+            boldMatcher.appendReplacement(sb, "<strong>" + boldMatcher.group(1) + "</strong>");
+        }
+        
+        boldMatcher.appendTail(sb);
+        return sb.toString();
+    }
+    
+    private static String processItalic(String html)
+    {
+        Pattern italicPattern = Pattern.compile("\\*(.*?)\\*");
+        Matcher italicMatcher = italicPattern.matcher(html);
+        StringBuffer sb = new StringBuffer();
+        
+        while (italicMatcher.find())
+        {
+            italicMatcher.appendReplacement(sb, "<em>" + italicMatcher.group(1) + "</em>");
+        }
+        
+        italicMatcher.appendTail(sb);
+        return sb.toString();
     }
     
     private static String processImages(String html)

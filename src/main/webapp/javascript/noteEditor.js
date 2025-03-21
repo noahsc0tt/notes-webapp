@@ -1,6 +1,7 @@
 // This file contains functions for inserting links and images into the note editor
 
-function insertTextAtCursor(template) {
+function insertTextAtCursor(template)
+{
     const textarea = document.getElementsByName("body")[0];
     const startPosition = textarea.selectionStart;
     const endPosition = textarea.selectionEnd;
@@ -11,7 +12,8 @@ function insertTextAtCursor(template) {
     textarea.focus();
 }
 
-function insertLink() {
+function insertLink()
+{
     const url = prompt("Enter URL:", "https://");
     const text = prompt("Enter link text:", "");
 
@@ -20,7 +22,8 @@ function insertLink() {
 
 function insertImage() { document.getElementById('imageUpload').click(); }
 
-function handleImageUpload() {
+function handleImageUpload()
+{
     const fileInput = document.getElementById('imageUpload');
     const file = fileInput.files[0];
     const label = prompt("Enter image label for searching:", file.name);
@@ -28,9 +31,8 @@ function handleImageUpload() {
 }
 
 // Add event listener for file upload
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function()
+{
     const imageUpload = document.getElementById('imageUpload');
-    if (imageUpload) {
-        imageUpload.addEventListener('change', handleImageUpload);
-    }
+    if (imageUpload) { imageUpload.addEventListener('change', handleImageUpload); }
 });
