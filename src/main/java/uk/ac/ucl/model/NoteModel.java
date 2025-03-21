@@ -13,7 +13,6 @@ class NoteModel
 {
     private final LinkedHashMap<LocalDateTime, NoteRecord> noteData;
     
-    // Package-private constructor so that only the factory creates a NoteModel object
     NoteModel()
     {
         LinkedHashMap<LocalDateTime, NoteRecord> tempData;
@@ -26,21 +25,21 @@ class NoteModel
         noteData = tempData;
     }
     
-    public LinkedHashMap<LocalDateTime, NoteRecord> getNoteMap() { return noteData; }
-    public NoteRecord getNoteRecord(LocalDateTime key) { return noteData.get(key); }
+    LinkedHashMap<LocalDateTime, NoteRecord> getNoteMap() { return new LinkedHashMap<>(noteData); }
+    NoteRecord getNoteRecord(LocalDateTime key) { return noteData.get(key); }
     
-    public void addNote(String name, String body)
+    void addNote(String name, String body)
     {
         NoteRecord newNote = new NoteRecord(name, body);
         noteData.put(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), newNote);
     }
     
-    public void updateNote(LocalDateTime key, String name, String body)
+    void updateNote(LocalDateTime key, String name, String body)
     {
         NoteRecord newNote = new NoteRecord(name, body);
         noteData.put(key, newNote);
     }
     
-    public void deleteNote(LocalDateTime key) { noteData.remove(key); }
+    void deleteNote(LocalDateTime key) { noteData.remove(key); }
     
 }
