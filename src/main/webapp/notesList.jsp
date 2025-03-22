@@ -1,6 +1,11 @@
 <%-- This JSP file is used to display the list of notes, with searching and sorting options. --%>
 
-<%@ include file="imports.jsp" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="uk.ac.ucl.model.NoteRecord" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Objects" %>
+<%@ page import="uk.ac.ucl.util.DateFormatter" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
