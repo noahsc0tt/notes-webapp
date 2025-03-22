@@ -28,17 +28,9 @@ class NoteModel
     LinkedHashMap<LocalDateTime, NoteRecord> getNoteMap() { return new LinkedHashMap<>(noteData); }
     NoteRecord getNoteRecord(LocalDateTime key) { return noteData.get(key); }
     
-    void addNote(String name, String body)
-    {
-        NoteRecord newNote = new NoteRecord(name, body);
-        noteData.put(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), newNote);
-    }
+    void addNote(NoteRecord note) { noteData.put(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), note); }
     
-    void updateNote(LocalDateTime key, String name, String body)
-    {
-        NoteRecord newNote = new NoteRecord(name, body);
-        noteData.put(key, newNote);
-    }
+    void updateNote(LocalDateTime key, NoteRecord note) { noteData.put(key, note); }
     
     void deleteNote(LocalDateTime key) { noteData.remove(key); }
     

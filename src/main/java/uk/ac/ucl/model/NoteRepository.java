@@ -25,12 +25,12 @@ public class NoteRepository
     
     public static void addNote(String name, String body)
     {
-        noteModel.addNote(name, body);
+        noteModel.addNote(createNoteRecord(name, body));
         sendUpdates();
     }
     public static void updateNote(LocalDateTime key, String name, String body)
     {
-        noteModel.updateNote(key, name, body);
+        noteModel.updateNote(key, createNoteRecord(name, body));
         sendUpdates();
     }
     public static void deleteNote(LocalDateTime key)
@@ -49,5 +49,12 @@ public class NoteRepository
         NoteSorter.outOfDate();
         try { JSONHandler.writeJSON(noteModel.getNoteMap()); }
         catch (JSONFileNotFoundException | JSONWriteException e) { e.printStackTrace(); }
+    }
+    
+    private static NoteRecord createNoteRecord(String name, String body)
+    {
+        if (name == null || name.isEmpty()) name = "Untitled Note";
+        if (body == null) body = "";
+        return new NoteRecord(name, body);
     }
 }

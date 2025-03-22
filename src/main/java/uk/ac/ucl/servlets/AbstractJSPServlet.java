@@ -15,6 +15,7 @@ public abstract class AbstractJSPServlet extends HttpServlet
 {
     protected void invokeJSP(String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        if (fileName == null || fileName.isEmpty()) throw new IllegalArgumentException("JSP file name cannot be null or empty");
         // Invoke the JSP page
         ServletContext context = getServletContext();
         RequestDispatcher dispatch = context.getRequestDispatcher(fileName);
