@@ -30,7 +30,7 @@ class NoteModel
     
     void addNote(NoteRecord note) { noteData.put(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), note); }
     
-    void updateNote(LocalDateTime key, NoteRecord note) { noteData.put(key, note); }
+    void updateNote(LocalDateTime key, NoteRecord note) { noteData.replace(key, note); }
     
     void deleteNote(LocalDateTime key) { noteData.remove(key); }
     
