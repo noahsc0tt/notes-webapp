@@ -18,6 +18,7 @@ out/
 # Build artifacts
 bin/
 target/
+war-file/
 
 # OS specific files
 .DS_Store
