@@ -4,11 +4,10 @@ package uk.ac.ucl.model;
 
 class NoteModelFactory
 {
-    private static NoteModel model = null;
+    private static NoteModel model = new NoteModel();
     
     public static NoteModel getNoteModel()
     {
-        if (model == null) model = new NoteModel();
         return model;
     }
 }

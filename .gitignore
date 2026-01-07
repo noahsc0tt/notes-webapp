@@ -10,6 +10,11 @@ logfile.txt
 *.iml
 out/
 
+# jdtls (Eclipse Java Language Server) - used by Neovim
+.classpath
+.project
+.settings/
+
 # Build artifacts
 bin/
 target/
